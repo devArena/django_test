@@ -1,0 +1,16 @@
+{% load staticfiles %}
+
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" /> -->
+
+{% if latest_event_list %}
+    <ul>
+    {% for event in latest_event_list %}
+        <li>
+        	{{ event.name }} <br/>
+        	{{ event.date}} 
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
