@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from djangoodle.models import Event
+from djangoodle.models import Event, Participant
 from django.views import generic
 from datetime import datetime
 from django.utils import timezone
@@ -39,11 +39,26 @@ def event_new(request):
 	return render(request,'djangoodle/event_new.html',{'form':form,}) 
 
 def event_detail(request,event_id):
-	p = get_object_or_404(Event, pk=event_id)
 	participant_form = ParticipantForm()
+	e = get_object_or_404(Event, pk=event_id)
+
+	if request.method == 'POST':
+		form = ParticipantForm(request.POST)
+		if form.is_valid():
+			name = form.cleaned_data['name']
+			
+			p = Participant(name=name,event=e)
+			p.save()
+			# Always return an HttpResponseRedirect after successfully dealing
+			# with POST data. This prevents data from being posted twice if a
+			# user hits the Back button.
+			# return HttpResponseRedirect(reverse('djangoodle:event_detail', args=(p.id,)))
+
 	return render(request, 'djangoodle/event_detail.html', {
-		'event': p,
+		'event': e,
+		'participant_list': e.participant_set.all(),
 		'participant_form': participant_form,
+
 	})
 
 # def participant_new(request):

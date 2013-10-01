@@ -2,6 +2,10 @@
 <p>{{ event.description }}</p>
 <p>{{ event.date }}</p>
 
+{% for participant in participant_list %}
+<p>{{ participant.name }}</p>
+{% endfor %}
+
 <form action="/djangoodle/event/{{ event.id }}/" method="post">{% csrf_token %}
 {{ participant_form.as_p }}
 <input type="submit" value="Submit" />
