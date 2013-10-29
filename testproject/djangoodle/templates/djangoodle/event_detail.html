@@ -1,12 +1,43 @@
-<h1>{{ event.name }}</h1>
-<p>{{ event.description }}</p>
-<p>{{ event.date }}</p>
 
-{% for participant in participant_list %}
-<p>{{ participant.name }}</p>
-{% endfor %}
+{% load dajaxice_templatetags %}
 
-<form action="/djangoodle/event/{{ event.id }}/" method="post">{% csrf_token %}
-{{ participant_form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+<html>
+    <head>        
+        <script type="text/javascript" charset="utf-8">
+            function my_js_callback(data){
+                window.console.log(data);
+            }
+        </script>
+
+        {% dajaxice_js_import %}
+
+    </head>
+    <body>
+		<h1>{{ event.name }}</h1>
+		<p>{{ event.description }}</p>
+		<p>{{ event.date }}</p>
+
+		<div id="participants">
+		{% for participant in participant_list %}
+		<p>{{ participant.name }}</p>
+		{% endfor %}
+		</div>
+
+		<!-- <form action="/djangoodle/event/{{ event.id }}/" method="post">{% csrf_token %}
+		{{ participant_form.as_p }}
+		<input type="submit" value="Submit" />
+		</form>
+		 -->
+
+		<!-- <form action="/djangoodle/event/{{ event.id }}/add_participant/" method="post">{% csrf_token %}
+		{{ participant_form.as_p }}
+		<input type="submit" value="Submit" />
+		</form> -->
+        
+        <form method="post" id="input_form">{% csrf_token %}
+			{{ participant_form.as_p }}
+			<input type="submit" value="Submit" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'event_id':{{event.id}}})"/>
+		</form>
+
+    </body>
+</html>

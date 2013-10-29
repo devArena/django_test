@@ -13,7 +13,8 @@
 
     </head>
     <body>
-        <form action="/djangoodle/event/" method="post">{% csrf_token %}
+        {# <form action="/djangoodle/event/" method="post">{% csrf_token %} #}
+        <form method="post">{% csrf_token %}
 		{{ form.as_p }}
 		<input value="Submit" onclick="Dajaxice.djangoodle.sayhello(my_js_callback)"/>
 		</form>
