@@ -1,4 +1,21 @@
-<form action="/djangoodle/event/" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+
+{% load dajaxice_templatetags %}
+
+<html>
+    <head>        
+        <script type="text/javascript" charset="utf-8">
+            function my_js_callback(data){
+                alert(data.message);
+            }
+        </script>
+
+        {% dajaxice_js_import %}
+
+    </head>
+    <body>
+        <form action="/djangoodle/event/" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input value="Submit" onclick="Dajaxice.djangoodle.sayhello(my_js_callback)"/>
+		</form>
+    </body>
+</html>

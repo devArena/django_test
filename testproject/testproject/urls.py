@@ -1,4 +1,7 @@
 from django.conf.urls import patterns, include, url
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
+
+dajaxice_autodiscover()
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -6,6 +9,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 	url(r'^djangoodle/', include('djangoodle.urls', namespace='djangoodle')),
+	url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     # Examples:
     # url(r'^$', 'testproject.views.home', name='home'),
     # url(r'^testproject/', include('testproject.foo.urls')),
