@@ -10,7 +10,7 @@ def sayhello(request):
     return simplejson.dumps({'message':'Hello World'})
 
 @dajaxice_register
-def add_participant(form,event_id):
+def add_participant(request,form,event_id):
     e = get_object_or_404(Event, pk=event_id)
     print "ererere"
     # if request.method == 'POST':
@@ -28,4 +28,4 @@ def add_participant(form,event_id):
     # with POST data. This prevents data from being posted twice if a
     # user hits the Back button.
     # return HttpResponseRedirect(reverse('djangoodle:event_detail', args=(p.id,)))
-    return simplejson.dumps({'message':'Hello World'})
+    return simplejson.dumps({'name':name})

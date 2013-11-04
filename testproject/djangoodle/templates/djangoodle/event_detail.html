@@ -6,6 +6,8 @@
         <script type="text/javascript" charset="utf-8">
             function my_js_callback(data){
                 window.console.log(data);
+                $("#participants").append("<p>" + data.name + "</p>");
+                $("#btn_add_participant").val("");
             }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -42,7 +44,7 @@
 
 		<form action="" method="post" id="input_form">{% csrf_token %}
 			{{ participant_form.as_p }}
-			<input type="button" value="Send" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'form':$('#input_form').serialize(true),'event_id':{{event.id}}})"/>
+			<input type="button" value="Send" id="btn_add_participant" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'form':$('#input_form').serialize(true),'event_id':{{event.id}}})"/>
 		</form>
 
     </body>
