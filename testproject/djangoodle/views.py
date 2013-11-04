@@ -42,17 +42,17 @@ def event_detail(request,event_id):
 	participant_form = ParticipantForm()
 	e = get_object_or_404(Event, pk=event_id)
 
-	if request.method == 'POST':
-		form = ParticipantForm(request.POST)
-		if form.is_valid():
-			name = form.cleaned_data['name']
+# 	if request.method == 'POST':
+# 		form = ParticipantForm(request.POST)
+# 		if form.is_valid():
+# 			name = form.cleaned_data['name']
 			
-			p = Participant(name=name,event=e)
-			p.save()
-			# Always return an HttpResponseRedirect after successfully dealing
-			# with POST data. This prevents data from being posted twice if a
-			# user hits the Back button.
-			# return HttpResponseRedirect(reverse('djangoodle:event_detail', args=(p.id,)))
+# 			p = Participant(name=name,event=e)
+# 			p.save()
+# 			# Always return an HttpResponseRedirect after successfully dealing
+# 			# with POST data. This prevents data from being posted twice if a
+# 			# user hits the Back button.
+# 			# return HttpResponseRedirect(reverse('djangoodle:event_detail', args=(p.id,)))
 
 	return render(request, 'djangoodle/event_detail.html', {
 		'event': e,

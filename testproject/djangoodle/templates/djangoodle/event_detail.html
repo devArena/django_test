@@ -8,6 +8,7 @@
                 window.console.log(data);
             }
         </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
         {% dajaxice_js_import %}
 
@@ -34,9 +35,14 @@
 		<input type="submit" value="Submit" />
 		</form> -->
         
-        <form method="post" id="input_form">{% csrf_token %}
+        <!-- <form method="post" id="input_form">{% csrf_token %}
 			{{ participant_form.as_p }}
 			<input type="submit" value="Submit" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'event_id':{{event.id}}})"/>
+		</form> -->
+
+		<form action="" method="post" id="input_form">{% csrf_token %}
+			{{ participant_form.as_p }}
+			<input type="button" value="Send" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'form':$('#input_form').serialize(true),'event_id':{{event.id}}})"/>
 		</form>
 
     </body>
