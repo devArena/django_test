@@ -3,20 +3,12 @@
 
 <html>
     <head>        
-        <script type="text/javascript" charset="utf-8">
-            function my_js_callback(data){
-                alert(data.message);
-            }
-        </script>
-
         {% dajaxice_js_import %}
-
     </head>
     <body>
-        {# <form action="/djangoodle/event/" method="post">{% csrf_token %} #}
         <form method="post">{% csrf_token %}
 		{{ form.as_p }}
-		<input value="Submit" onclick="Dajaxice.djangoodle.sayhello(my_js_callback)"/>
+		<input value="Submit" type="submit"/>
 		</form>
     </body>
 </html>

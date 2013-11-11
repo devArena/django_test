@@ -1,17 +1,13 @@
 
 {% load dajaxice_templatetags %}
+{% load staticfiles %}
 
 <html>
     <head>        
-        <script type="text/javascript" charset="utf-8">
-            function my_js_callback(data){
-                window.console.log(data);
-                $("#participants").append("<p>" + data.name + "</p>");
-                $("#id_name").val("");
-            }
-        </script>
+        
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
+       	<script src="{% static 'djangoodle/event_detail.js' %}"></script>
+        
         {% dajaxice_js_import %}
 
     </head>
@@ -26,25 +22,9 @@
 		{% endfor %}
 		</div>
 
-		<!-- <form action="/djangoodle/event/{{ event.id }}/" method="post">{% csrf_token %}
-		{{ participant_form.as_p }}
-		<input type="submit" value="Submit" />
-		</form>
-		 -->
-
-		<!-- <form action="/djangoodle/event/{{ event.id }}/add_participant/" method="post">{% csrf_token %}
-		{{ participant_form.as_p }}
-		<input type="submit" value="Submit" />
-		</form> -->
-        
-        <!-- <form method="post" id="input_form">{% csrf_token %}
-			{{ participant_form.as_p }}
-			<input type="submit" value="Submit" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'event_id':{{event.id}}})"/>
-		</form> -->
-
 		<form action="" method="post" id="input_form">{% csrf_token %}
 			{{ participant_form.as_p }}
-			<input type="button" value="Send" id="btn_add_participant" onclick="Dajaxice.djangoodle.add_participant(my_js_callback,{'form':$('#input_form').serialize(true),'event_id':{{event.id}}})"/>
+			<input type="button" value="Send" id="btn_add_participant" onclick="add_participant({{event.id}})"/>
 		</form>
 
     </body>

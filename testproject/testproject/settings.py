@@ -1,3 +1,5 @@
+import os
+
 # Django settings for testproject project.
 
 DEBUG = True
@@ -8,6 +10,8 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+PROJECT_DIR = os.path.dirname(__file__)
 
 DATABASES = {
     'default': {
@@ -61,6 +65,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
+# STATIC_ROOT = os.path.join(PROJECT_DIR,'static')
 STATIC_ROOT = ''
 
 # URL prefix for static files.
